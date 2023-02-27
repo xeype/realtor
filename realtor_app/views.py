@@ -35,6 +35,12 @@ def delete(request, id):
     return HttpResponseRedirect(reverse('customers'))
 
 
+def delete2(request, id):
+    member = Employees.objects.get(id=id)
+    member.delete()
+    return HttpResponseRedirect(reverse('employees'))
+
+
 def addcustomer(request):
     fn = request.POST['first_name']
     sn = request.POST['second_name']

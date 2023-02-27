@@ -24,6 +24,7 @@
             <td>{{ employee.second_name }}</td>
             <td>{{ employee.phone_number }}</td>
             <td>{{ employee.address }}</td>
+            <td><a href="delete/{{ employee.id }}" class="btn btn-danger">delete</a></td>
         </tr>
         {% endfor %}
         </tbody>
