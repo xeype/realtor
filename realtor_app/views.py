@@ -117,7 +117,7 @@ def addemployee(request):
 
 
 def services(request):
-    my_services = Services.objects.all().values('id', 'service_name', 'price')
+    my_services = Services.objects.all().values('id', 'service_name', 'price_id_id')
     template = loader.get_template('all_services.html')
     context = {
         'services': my_services
