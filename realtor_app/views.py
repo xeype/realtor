@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Customers, Employees
+from .models import Customers, Employees, Services, Prices
 from django.template import loader
 
 
@@ -114,3 +114,12 @@ def addemployee(request):
     member = Employees(first_name=fn, second_name=sn, phone_number=pn, address=ad)
     member.save()
     return HttpResponseRedirect(reverse('employees'))
+
+
+def services(request):
+    my_services = Services.objects.all().values('id', 'service_name', 'price_id')
+    template = loader.get_template('all_services.html')
+    context = {
+        'services': my_services
+    }
+    return HttpResponse(template.render(context, request))

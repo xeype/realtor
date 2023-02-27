@@ -20,16 +20,20 @@ from realtor_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
+
     path('customers/', views.customers, name='customers'),
     path('customers/add/', views.add, name='add'),
     path('customers/add/addcustomer/', views.addcustomer, name='addcustomer'),
     path('customers/delete/<int:id>', views.delete, name='delete'),
     path('customers/update/<int:id>', views.update, name='update'),
     path('customers/update/updatecustomer/<int:id>', views.updatecustomer, name='updatecustomer'),
+
     path('employees/', views.employees, name='employees'),
     path('employees/add/', views.add2, name='add2'),
     path('employees/add/addemployee/', views.addemployee, name='addemployee'),
     path('employees/delete/<int:id>', views.delete2, name='delete2'),
     path('employees/update/<int:id>', views.update2, name='update2'),
     path('employees/update/updateemployee/<int:id>', views.updateemployee, name='updateemployee'),
+
+    path('services/', views.services, name='services')
 ]
