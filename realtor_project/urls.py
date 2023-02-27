@@ -23,6 +23,7 @@ urlpatterns = [
     path('customers/', views.customers, name='customers'),
     path('customers/add/', views.add, name='add'),
     path('customers/add/addcustomer/', views.addcustomer, name='addcustomer'),
+    path('customers/delete/<int:id>', views.delete, name='delete'),
     path('employees/', views.employees, name='employees'),
     path('employees/add/', views.add2, name='add2'),
     path('employees/add/addemployee/', views.addemployee, name='addemployee'),

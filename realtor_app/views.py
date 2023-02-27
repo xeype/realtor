@@ -29,6 +29,12 @@ def add2(request):
     return HttpResponse(template.render({}, request))
 
 
+def delete(request, id):
+    member = Customers.objects.get(id=id)
+    member.delete()
+    return HttpResponseRedirect(reverse('customers'))
+
+
 def addcustomer(request):
     fn = request.POST['first_name']
     sn = request.POST['second_name']
