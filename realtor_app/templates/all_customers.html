@@ -19,11 +19,10 @@
         <tbody>
         {% for customer in customers %}
         <tr>
-            <td>{{ customer[0] }}</td>
-            <td>{{ customer[1] }}</td>
-            <td>{{ customer[2] }}</td>
-            <td>{{ customer[3] }}</td>
-            <td>{{ customer[4] }}</td>
+            <td>{{ customer.first_name }}</td>
+            <td>{{ customer.second_name }}</td>
+            <td>{{ customer.phone_number }}</td>
+            <td>{{ customer.address }}</td>
         </tr>
         {% endfor %}
         </tbody>
