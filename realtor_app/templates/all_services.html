@@ -17,10 +17,10 @@
         <tbody>
         {% for object in objects %}
         <tr>
-            <td><a href="update/{{ object.id }}">{{ object.id }}</a></td>
-            <td>{{ object.service_name }}</td>
-            <td>{{ object.prices.price }}</td>
-            <td><a href="delete/{{ object.id }}" class="btn btn-danger">delete</a></td>
+            <td><a href="update/{{ object.0 }}">{{ object.0 }}</a></td>
+            <td>{{ object.1 }}</td>
+            <td>{{ object.2 }}</td>
+            <td><a href="delete/{{ object.0 }}" class="btn btn-danger">delete</a></td>
         </tr>
         {% endfor %}
         </tbody>

@@ -1,3 +1,4 @@
+from django.db import connection
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Customers, Employees, Services, Prices
@@ -117,10 +118,10 @@ def addemployee(request):
 
 
 def services(request):
-    # query = "SELECT a.id, a.service_name, b.price FROM realtor_app_services a, realtor_app_prices b WHERE a.price_id = b.id;"
-    # my_services = Services.objects.raw(query)
-    my_objects = Services.objects.select_related('price').all()
-    print(my_objects.values())
+    query = 'SELECT a.id, a.service_name, b.price FROM realtor_app_services a, realtor_app_prices b WHERE a.price_id = b.id;'
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        my_objects = cursor.fetchall()
     template = loader.get_template('all_services.html')
     context = {
         'objects': my_objects
