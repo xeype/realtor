@@ -1,8 +1,6 @@
-from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-
-from .models import Customers
+from .models import Customers, Employees
 from django.template import loader
 
 
@@ -26,6 +24,11 @@ def add(request):
     return HttpResponse(template.render({}, request))
 
 
+def add2(request):
+    template = loader.get_template('add_employee.html')
+    return HttpResponse(template.render({}, request))
+
+
 def addcustomer(request):
     fn = request.POST['first_name']
     sn = request.POST['second_name']
@@ -34,3 +37,22 @@ def addcustomer(request):
     member = Customers(first_name=fn, second_name=sn, phone_number=pn, address=ad)
     member.save()
     return HttpResponseRedirect(reverse('customers'))
+
+
+def employees(request):
+    my_employees = Employees.objects.all().values()
+    template = loader.get_template('all_employees.html')
+    context = {
+        'employees': my_employees
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def addemployee(request):
+    fn = request.POST['first_name']
+    sn = request.POST['second_name']
+    pn = request.POST['phone_number']
+    ad = request.POST['address']
+    member = Employees(first_name=fn, second_name=sn, phone_number=pn, address=ad)
+    member.save()
+    return HttpResponseRedirect(reverse('employees'))
