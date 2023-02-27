@@ -25,23 +25,6 @@ def add(request):
     return HttpResponse(template.render({}, request))
 
 
-def add2(request):
-    template = loader.get_template('add_employee.html')
-    return HttpResponse(template.render({}, request))
-
-
-def delete(request, id):
-    member = Customers.objects.get(id=id)
-    member.delete()
-    return HttpResponseRedirect(reverse('customers'))
-
-
-def delete2(request, id):
-    member = Employees.objects.get(id=id)
-    member.delete()
-    return HttpResponseRedirect(reverse('employees'))
-
-
 def addcustomer(request):
     fn = request.POST['first_name']
     sn = request.POST['second_name']
@@ -61,15 +44,6 @@ def update(request, id):
     return HttpResponse(template.render(context, request))
 
 
-def update2(request, id):
-    employee = Employees.objects.get(id=id)
-    template = loader.get_template('update_employee.html')
-    context = {
-        'employee': employee
-    }
-    return HttpResponse(template.render(context, request))
-
-
 def updatecustomer(request, id):
     fn = request.POST['first_name']
     sn = request.POST['second_name']
@@ -82,6 +56,45 @@ def updatecustomer(request, id):
     member.address = ad
     member.save()
     return HttpResponseRedirect(reverse('customers'))
+
+
+def delete(request, id):
+    member = Customers.objects.get(id=id)
+    member.delete()
+    return HttpResponseRedirect(reverse('customers'))
+
+
+def employees(request):
+    my_employees = Employees.objects.all().values()
+    template = loader.get_template('all_employees.html')
+    context = {
+        'employees': my_employees
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def add2(request):
+    template = loader.get_template('add_employee.html')
+    return HttpResponse(template.render({}, request))
+
+
+def addemployee(request):
+    fn = request.POST['first_name']
+    sn = request.POST['second_name']
+    pn = request.POST['phone_number']
+    ad = request.POST['address']
+    member = Employees(first_name=fn, second_name=sn, phone_number=pn, address=ad)
+    member.save()
+    return HttpResponseRedirect(reverse('employees'))
+
+
+def update2(request, id):
+    employee = Employees.objects.get(id=id)
+    template = loader.get_template('update_employee.html')
+    context = {
+        'employee': employee
+    }
+    return HttpResponse(template.render(context, request))
 
 
 def updateemployee(request, id):
@@ -98,22 +111,9 @@ def updateemployee(request, id):
     return HttpResponseRedirect(reverse('employees'))
 
 
-def employees(request):
-    my_employees = Employees.objects.all().values()
-    template = loader.get_template('all_employees.html')
-    context = {
-        'employees': my_employees
-    }
-    return HttpResponse(template.render(context, request))
-
-
-def addemployee(request):
-    fn = request.POST['first_name']
-    sn = request.POST['second_name']
-    pn = request.POST['phone_number']
-    ad = request.POST['address']
-    member = Employees(first_name=fn, second_name=sn, phone_number=pn, address=ad)
-    member.save()
+def delete2(request, id):
+    member = Employees.objects.get(id=id)
+    member.delete()
     return HttpResponseRedirect(reverse('employees'))
 
 
