@@ -117,7 +117,9 @@ def addemployee(request):
 
 
 def services(request):
-    my_services = Services.objects.all().values('id', 'service_name', 'price_id_id')
+    query = "SELECT a.id, a.service_name, b.price FROM services a, prices b WHERE a.price_id = b.id;"
+    my_services = Services.objects.raw(query)
+    # my_services = Services.objects.all().values('id', 'service_name', 'price_id_id')
     template = loader.get_template('all_services.html')
     context = {
         'services': my_services

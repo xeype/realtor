@@ -22,4 +22,4 @@ class Prices(models.Model):
 
 class Services(models.Model):
     service_name = models.CharField(max_length=255)
-    price_id = models.ForeignKey(Prices, on_delete=models.CASCADE)
+    price = models.ForeignKey(Prices, on_delete=models.CASCADE)
