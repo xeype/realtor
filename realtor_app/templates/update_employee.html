@@ -1,8 +1,8 @@
 {% include 'base.html' %}
 
 {% block content %}
-<h2>Update Customer</h2>
-<form action="updatecustomer/{{ customer.id }}" method="post">
+<h2>Update Employee</h2>
+<form action="updateemployee/{{ employee.id }}" method="post">
     {% csrf_token %}
     <div class="form-group">
         <label for="first_name">First Name:</label>
@@ -20,6 +20,6 @@
         <label for="address">Address:</label>
         <input type="text" class="form-control" id="address" name="address" required>
     </div>
-    <button type="submit" value="Submit" class="btn btn-primary">Update Customer</button>
+    <button type="submit" value="Submit" class="btn btn-primary">Update Employee</button>
 </form>
 {% endblock %}

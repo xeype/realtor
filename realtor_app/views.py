@@ -60,6 +60,15 @@ def update(request, id):
     return HttpResponse(template.render(context, request))
 
 
+def update2(request, id):
+    employee = Employees.objects.get(id=id)
+    template = loader.get_template('update_employee.html')
+    context = {
+        'employee': employee
+    }
+    return HttpResponse(template.render(context, request))
+
+
 def updatecustomer(request, id):
     fn = request.POST['first_name']
     sn = request.POST['second_name']
@@ -72,6 +81,20 @@ def updatecustomer(request, id):
     member.address = ad
     member.save()
     return HttpResponseRedirect(reverse('customers'))
+
+
+def updateemployee(request, id):
+    fn = request.POST['first_name']
+    sn = request.POST['second_name']
+    pn = request.POST['phone_number']
+    ad = request.POST['address']
+    member = Employees.objects.get(id=id)
+    member.first_name = fn
+    member.second_name = sn
+    member.phone_number = pn
+    member.address = ad
+    member.save()
+    return HttpResponseRedirect(reverse('employees'))
 
 
 def employees(request):
