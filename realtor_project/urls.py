@@ -20,5 +20,7 @@ from realtor_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='homepage'),
-    path('customers/', views.customers, name='customers')
+    path('customers/', views.customers, name='customers'),
+    path('customers/add/', views.add, name='add'),
+    path('customers/add/addcustomer/', views.addcustomer, name='addcustomer'),
 ]
