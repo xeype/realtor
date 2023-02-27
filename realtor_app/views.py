@@ -117,9 +117,9 @@ def addemployee(request):
 
 
 def services(request):
-    query = "SELECT a.id, a.service_name, b.price FROM realtor_app_services a, realtor_app_prices b WHERE a.price_id = b.id;"
-    my_services = Services.objects.raw(query)
-    # my_services = Services.objects.all().values('id', 'service_name', 'price_id_id')
+    # query = "SELECT a.id, a.service_name, b.price FROM realtor_app_services a, realtor_app_prices b WHERE a.price_id = b.id;"
+    # my_services = Services.objects.raw(query)
+    my_services = Services.objects.filter().select_related().values('id', 'service_name', 'price')
     template = loader.get_template('all_services.html')
     context = {
         'services': my_services
