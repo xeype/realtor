@@ -127,3 +127,56 @@ def services(request):
         'objects': my_objects
     }
     return HttpResponse(template.render(context, request))
+
+
+def add3(request):
+    template = loader.get_template('add_service.html')
+    return HttpResponse(template.render({}, request))
+
+
+def addservice(request):
+    sn = request.POST['service_name']
+    p = request.POST['price']
+
+    price = Prices(price=p)
+    price.save()
+
+    get_price = Prices.objects.filter(price=p)
+    pid = get_price.latest('id').id
+
+    service = Services(service_name=sn, price_id=pid)
+    service.save()
+    return HttpResponseRedirect(reverse('services'))
+
+
+def update3(request, id):
+    service = Services.objects.get(id=id)
+    template = loader.get_template('update_service.html')
+    context = {
+        'service': service
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def updateservice(request, id):
+    sn = request.POST['service_name']
+    p = request.POST['price']
+
+    service = Services.objects.get(id=id)
+
+    pid = service.price_id
+
+    service.service_name = sn
+    service.save()
+
+    prices = Prices.objects.get(id=pid)
+    prices.price = p
+    prices.save()
+
+    return HttpResponseRedirect(reverse('services'))
+
+
+def delete3(request, id):
+    service = Services.objects.get(id=id)
+    service.delete()
+    return HttpResponseRedirect(reverse('services'))

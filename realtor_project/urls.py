@@ -35,5 +35,10 @@ urlpatterns = [
     path('employees/update/<int:id>', views.update2, name='update2'),
     path('employees/update/updateemployee/<int:id>', views.updateemployee, name='updateemployee'),
 
-    path('services/', views.services, name='services')
+    path('services/', views.services, name='services'),
+    path('services/add/', views.add3, name='add3'),
+    path('services/add/addservice/', views.addservice, name='addservice'),
+    path('services/delete/<int:id>', views.delete3, name='delete3'),
+    path('services/update/<int:id>', views.update3, name='update3'),
+    path('services/update/updateservice/<int:id>', views.updateservice, name='updateservice'),
 ]
