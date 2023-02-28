@@ -1,7 +1,7 @@
 from django.db import connection
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Customers, Employees, Services, Prices
+from .models import Customers, Employees, Services, Prices, Apartments
 from django.template import loader
 
 
@@ -180,3 +180,77 @@ def delete3(request, id):
     service = Services.objects.get(id=id)
     service.delete()
     return HttpResponseRedirect(reverse('services'))
+
+
+def apartments(request):
+    query = 'SELECT a.id, a.num_of_rooms, a.address, b.first_name, b.second_name, b.phone_number,' \
+            'c.price FROM realtor_app_apartments a, realtor_app_employees b, realtor_app_prices c ' \
+            'WHERE a.price_id = c.id AND a.manager_id = b.id;'
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        my_objects = cursor.fetchall()
+    template = loader.get_template('all_apartments.html')
+    context = {
+        'objects': my_objects
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def add4(request):
+    template = loader.get_template('add_apartment.html')
+    return HttpResponse(template.render({}, request))
+
+
+def addapartment(request):
+    nr = request.POST['num_of_rooms']
+    ad = request.POST['address']
+    mid = request.POST['manager_id']
+    p = request.POST['price']
+
+    price = Prices(price=p)
+    price.save()
+
+    get_price = Prices.objects.filter(price=p)
+    pid = get_price.latest('id').id
+
+    apartment = Apartments(num_of_rooms=nr, address=ad, manager_id=mid, price_id=pid)
+    apartment.save()
+
+    return HttpResponseRedirect(reverse('apartments'))
+
+
+def update4(request, id):
+    apartment = Apartments.objects.get(id=id)
+    template = loader.get_template('update_apartment.html')
+    context = {
+        'apartment': apartment
+    }
+    return HttpResponse(template.render(context, request))
+
+
+def updateapartment(request, id):
+    nr = request.POST['num_of_rooms']
+    ad = request.POST['address']
+    mid = request.POST['manager_id']
+    p = request.POST['price']
+
+    price = Prices(price=p)
+    price.save()
+
+    get_price = Prices.objects.filter(price=p)
+    pid = get_price.latest('id').id
+
+    apartment = Apartments.objects.get(id=id)
+    apartment.num_of_rooms = nr
+    apartment.address = ad
+    apartment.manager_id = mid
+    apartment.price_id = pid
+    apartment.save()
+
+    return HttpResponseRedirect(reverse('apartments'))
+
+
+def delete4(request, id):
+    apartment = Apartments.objects.get(id=id)
+    apartment.delete()
+    return HttpResponseRedirect(reverse('apartments'))

@@ -41,4 +41,11 @@ urlpatterns = [
     path('services/delete/<int:id>', views.delete3, name='delete3'),
     path('services/update/<int:id>', views.update3, name='update3'),
     path('services/update/updateservice/<int:id>', views.updateservice, name='updateservice'),
+
+    path('apartments/', views.apartments, name='apartments'),
+    path('apartments/add/', views.add4, name='add4'),
+    path('apartments/add/addapartment/', views.addapartment, name='addapartment'),
+    path('apartments/delete/<int:id>', views.delete4, name='delete4'),
+    path('apartments/update/<int:id>', views.update4, name='update4'),
+    path('apartments/update/updateapartment/<int:id>', views.updateapartment, name='updateapartment'),
 ]
