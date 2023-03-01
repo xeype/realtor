@@ -48,4 +48,8 @@ urlpatterns = [
     path('apartments/delete/<int:id>', views.delete4, name='delete4'),
     path('apartments/update/<int:id>', views.update4, name='update4'),
     path('apartments/update/updateapartment/<int:id>', views.updateapartment, name='updateapartment'),
+
+    path('agreements/', views.agreements, name='agreements'),
+    path('agreements/add/', views.add5, name='add5'),
+    path('agreements/add/addagreement/', views.addagreement, name='addagreement'),
 ]

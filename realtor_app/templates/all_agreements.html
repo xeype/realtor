@@ -1,0 +1,32 @@
+{% include 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h4>Agreements</h4>
+    <div class="mb-3">
+        <a href="add/" class="btn btn-primary">Add agreement</a>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Apartments</th>
+            <th>Customer</th>
+            <th>Manager</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for object in objects %}
+        <tr>
+            <td>{{ object.0 }}</td>
+            <td>ID: {{ object.1 }} <br> Num of rooms: {{ object.2 }} <br> Address: {{ object.3 }}</td>
+            <td>Name: {{ object.7 }} {{ object.8 }} <br> Phone number: {{ object.9 }}</td>
+            <td>Name: {{ object.4 }} {{ object.5 }} <br> Phone number: {{ object.6 }}</b></td>
+            <td>{{ object.9 }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
