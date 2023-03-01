@@ -260,7 +260,9 @@ def agreements(request):
     query = 'SELECT ag.id, a.id, a.num_of_rooms, a.address, b.first_name, b.second_name, b.phone_number,' \
             'c.first_name, c.second_name, c.phone_number, d.price ' \
             'FROM realtor_app_agreements ag, realtor_app_apartments a, realtor_app_employees b, realtor_app_customers c, realtor_app_prices d ' \
-            'WHERE a.price_id = d.id AND a.manager_id = b.id;'
+            'WHERE a.price_id = d.id AND a.manager_id = b.id ' \
+            'AND b.id = ag.employee_id ' \
+            'AND c.id = ag.customer_id;'
     with connection.cursor() as cursor:
         cursor.execute(query)
         my_objects = cursor.fetchall()
