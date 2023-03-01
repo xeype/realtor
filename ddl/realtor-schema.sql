@@ -74,3 +74,10 @@ CREATE TABLE public.agreements
         FOREIGN KEY (employee_id)
             REFERENCES employees (id)
 );
+
+CREATE unique index emp_i ON public.employees using btree;
+CREATE index cus_i ON public.customers using btree;
+CREATE index p_i ON public.prices using btree;
+CREATE index s_i ON public.services using btree;
+CREATE index a_i ON public.apartments using btree;
+CREATE index ag_i ON public.agreements using btree;
